@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ToDoList"
+             x:Class="ToDoList.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:TodoViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto,*" Padding="20">
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label 
+                Text="Todo List"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Entry 
+                    Grid.Column="0"
+                    Placeholder="Enter new todo"
+                    Text="{Binding NewTodoText}" />
+
+                <Button 
+                    Grid.Column="1"
+                    Text="Add"
+                    Command="{Binding AddTodoCommand}"
+                    Margin="5,0,0,0" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <CollectionView 
+            Grid.Row="1"
+            ItemsSource="{Binding TodoItems}"
+            Margin="0,20,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Frame>
+                            <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                                <Label 
+                                    Text="{Binding Text}"
+                                    VerticalOptions="Center" />
+
+                                <CheckBox 
+                                    Grid.Column="1"
+                                    IsChecked="{Binding IsCompleted}" />
+
+                                <Button 
+                                    Grid.Column="2"
+                                    Text="Edit"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:TodoViewModel}}, Path=EditTodoCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Margin="5,0" />
+
+                                <Button 
+                                    Grid.Column="3"
+                                    Text="Delete"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:TodoViewModel}}, Path=DeleteTodoCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
