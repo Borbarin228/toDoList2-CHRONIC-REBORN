@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ToDoList"
              x:Class="ToDoList.MainPage">
-
-    <ContentPage.BindingContext>
+   
+        <ContentPage.BindingContext>
         <local:TodoViewModel />
     </ContentPage.BindingContext>
-
-    <Grid RowDefinitions="Auto,*" Padding="20">
+    <Grid>
+        <Image Source="C:\Users\Boris\Desktop\мобильные устройства\ToDoList\Resources\Images\background.jpg" Aspect="AspectFill" Opacity="0.3"/>
+        <Grid RowDefinitions="Auto,*" Padding="20">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Label 
                 Text="Todo List"
@@ -66,5 +67,5 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
-
+        </Grid>
 </ContentPage>
